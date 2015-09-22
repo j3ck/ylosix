@@ -82,4 +82,14 @@ class ProductTest < ActiveSupport::TestCase
     product = products(:camera)
     assert product.replace_keys_features.class == Hash
   end
+
+  test 'slug' do
+    pt = ProductTranslation.new(name: 't', locale: :en, slug: 'test')
+    pr = Product.new(product_translations: [pt])
+    pr.save
+    pt = ProductTranslation.new(name: 't', locale: :en, slug: 'test')
+    pr = Product.new(product_translations: [pt])
+    pr.save
+    assert pt.slug == 'test_1'
+  end
 end

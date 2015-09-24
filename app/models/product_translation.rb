@@ -21,6 +21,7 @@
 #
 
 class ProductTranslation < ActiveRecord::Base
+  include GenerateUniqueSlug
   belongs_to :product
   belongs_to :language, primary_key: :locale, foreign_key: :locale
   after_initialize :load_features

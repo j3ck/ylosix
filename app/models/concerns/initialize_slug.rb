@@ -14,25 +14,8 @@ module InitializeSlug
         end
       end
 
-      if need_unique_slug?(translation.class)
-        slug = generate_unique_slug(translation, slug)
-      end
-
       translation.slug = parse_url_chars(slug)
     end
-  end
-
-  def generate_unique_slug(translation, slug)
-    slug_count = translation.class.where("locale = '#{I18n.locale}' AND slug like '%#{slug}%'").size
-    if slug_count > 0 && slug != 'needs-to-be-changed'
-      "#{slug}_#{slug_count}"
-    else
-      slug
-    end
-  end
-
-  def need_unique_slug?(klass)
-    [ProductTranslation, CategoryTranslation].include? klass
   end
 
   def parse_url_chars(str)

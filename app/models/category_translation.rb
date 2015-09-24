@@ -20,6 +20,7 @@
 #
 
 class CategoryTranslation < ActiveRecord::Base
+  include GenerateUniqueSlug
   belongs_to :category
   belongs_to :language, primary_key: :locale, foreign_key: :locale
   # validates_uniqueness_of locale: { scope: :category_id }

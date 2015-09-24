@@ -87,9 +87,10 @@ class ProductTest < ActiveSupport::TestCase
     pt = ProductTranslation.new(name: 't', locale: :en, slug: 'test')
     pr = Product.new(product_translations: [pt])
     pr.save
+    id = ProductTranslation.maximum('id')
     pt = ProductTranslation.new(name: 't', locale: :en, slug: 'test')
     pr = Product.new(product_translations: [pt])
     pr.save
-    assert pt.slug == 'test_1'
+    assert pt.slug == "test_#{id}"
   end
 end
